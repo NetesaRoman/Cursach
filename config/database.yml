@@ -15,14 +15,14 @@ default: &default
 
 development:
   <<: *default
-  database: movies
+  database: moviesDB
 
 
 test:
   <<: *default
-  database: movies
+  database: moviesDB
 
 
 production:
   <<: *default
-  database: movies
+  database: moviesDB
