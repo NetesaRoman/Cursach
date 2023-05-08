@@ -1,0 +1,2 @@
+module MovieShortsHelper
+end
