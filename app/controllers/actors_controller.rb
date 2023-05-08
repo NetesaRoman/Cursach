@@ -1,4 +1,5 @@
 class ActorsController < ApplicationController
+  before_action :authenticate_user!
   def index
 
     @actors= Actor.all
@@ -21,19 +22,21 @@ class ActorsController < ApplicationController
 
   def new
     @actor= Actor.new
+
+
   end
 
   def create
     @actor= Actor.create(actor_params)
 
-    redirect_to "actors#index", allow_other_host: true
+    redirect_to actors_path, allow_other_host: true
   end
 
   def destroy
     @actor= Actor.find(params[:id])
     @actor.destroy
 
-    redirect_to "actors#index", allow_other_host: true
+    redirect_to actors_path, allow_other_host: true
   end
 
   private

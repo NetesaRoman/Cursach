@@ -1,4 +1,5 @@
 class GenresController < ApplicationController
+  before_action :authenticate_user!
   def index
 
     @genres= Genre.all
@@ -26,14 +27,14 @@ class GenresController < ApplicationController
   def create
     @genre= Genre.create(genre_params)
 
-    redirect_to "genres#index", allow_other_host: true
+    redirect_to genres_path, allow_other_host: true
   end
 
   def destroy
     @genre= Genre.find(params[:id])
     @genre.destroy
 
-    redirect_to "genres#index", allow_other_host: true
+    redirect_to genres_path, allow_other_host: true
   end
 
   private

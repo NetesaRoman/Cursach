@@ -1,4 +1,5 @@
 class ReviewsController < ApplicationController
+  before_action :authenticate_user!
   def index
 
     @reviews= Review.all
@@ -26,14 +27,14 @@ class ReviewsController < ApplicationController
   def create
     @review= Review.create(review_params)
 
-    redirect_to "reviews#index", allow_other_host: true
+    redirect_to reviews_path, allow_other_host: true
   end
 
   def destroy
     @review= Review.find(params[:id])
     @review.destroy
 
-    redirect_to "reviews#index", allow_other_host: true
+    redirect_to reviews_path, allow_other_host: true
   end
 
   private

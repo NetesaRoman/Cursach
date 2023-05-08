@@ -1,4 +1,5 @@
 class CategoriesController < ApplicationController
+  before_action :authenticate_user!
   def index
 
     @categories= Category.all
@@ -26,14 +27,14 @@ class CategoriesController < ApplicationController
   def create
     @category= Category.create(category_params)
 
-    redirect_to "categories#index", allow_other_host: true
+    redirect_to categories_path, allow_other_host: true
   end
 
   def destroy
     @category= Category.find(params[:id])
     @category.destroy
 
-    redirect_to "categories#index", allow_other_host: true
+    redirect_to categories_path, allow_other_host: true
   end
 
   private

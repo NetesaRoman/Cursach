@@ -1,4 +1,5 @@
 class MoviesController < ApplicationController
+  before_action :authenticate_user!
   def index
 
     @movies= Movie.all
@@ -26,14 +27,14 @@ class MoviesController < ApplicationController
   def create
     @movie= Movie.create(movie_params)
 
-    redirect_to "movies#index", allow_other_host: true
+    redirect_to movies_path, allow_other_host: true
   end
 
   def destroy
     @movie= Movie.find(params[:id])
     @movie.destroy
 
-    redirect_to "movies#index", allow_other_host: true
+    redirect_to movies_path, allow_other_host: true
   end
 
   private
