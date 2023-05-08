@@ -1,0 +1,43 @@
+<div>
+
+  <div>
+
+    <h2>Name:</h2>
+    <p><%= @movie.title %></p>
+    <h2>Url:</h2>
+    <p><%= @movie.url %></p>
+    <h2>Id:</h2>
+    <p><%= @movie.id %></p>
+    <h2>Tagline:</h2>
+    <p><%= @movie.tagline %></p>
+    <h2>Poster:</h2>
+    <p><%= @movie.poster %></p>
+    <h2>Year:</h2>
+    <p><%= @movie.year %></p>
+    <h2>Country:</h2>
+    <p><%= @movie.country %></p>
+    <h2>World premier:</h2>
+    <p><%= @movie.world_premier %></p>
+    <h2>budget:</h2>
+    <p><%= @movie.budget %></p>
+    <h2>Fees in world:</h2>
+    <p><%= @movie.fees_in_world %></p>
+    <h2>Fees in usa:</h2>
+    <p><%= @movie.fees_in_usa %></p>
+    <h2>Category:</h2>
+    <p><%= @movie.category.name %></p>
+    <h2>Draft:</h2>
+    <p><%= @movie.draft %></p>
+    <h2>Description:</h2>
+    <p><%= @movie.description %></p>
+
+
+
+  </div>
+  <%= link_to "Back to list", root_path %>
+
+  <div id="root_buttons" >
+    <td><%= button_to 'Edit', edit_movie_path(@movie), method: :get, id: 'rootBtn' %></td>
+    <td><%= button_to 'Remove', movie_path(@movie), method: :delete, data: { confirm: 'Are you sure?' }, id: 'rootBtn' %></td>
+  </div>
+</div>

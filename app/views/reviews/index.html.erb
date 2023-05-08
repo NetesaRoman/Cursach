@@ -1,0 +1,25 @@
+
+
+<li><%= link_to 'Create review', new_review_path%></li>
+<li><%= link_to 'Main page', main_index_path%></li>
+
+
+  <div >
+    <table >
+      <thead >
+      <tr>
+        <th >Review Name</th>
+        <th>Action</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @reviews.each do |review| %>
+        <tr>
+          <td><%= review.name %></td>
+          <td><%= link_to 'Show', review_path(review.id) %></td>
+
+
+      <% end %>
+      </table>
+  </div>
+

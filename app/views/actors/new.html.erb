@@ -1,0 +1,24 @@
+
+
+
+  <div >
+    <%= form_with(id: 'modelForm', model: @actor, local: true) do |form| %>
+      <div >
+        <%= form.label :name %>
+        <%= form.text_field :name, class: 'form-control' %>
+        <%= form.label :age %>
+        <%= form.text_field :age, class: 'form-control' %>
+        <%= form.label :description %>
+        <%= form.text_field :description, class: 'form-control' %>
+        <%= form.label :image %>
+        <%= form.text_field :image, class: 'form-control' %>
+
+      </div>
+
+      <div >
+        <%= form.submit class: 'form-control btn-primary' %>
+      </div>
+    <% end %>
+  </div>
+</div>
+

@@ -1,0 +1,13 @@
+
+
+<%= form_with id: 'modelForm', model: @actor do |form| %>
+  <%= form.label :name %>
+  <%= form.text_field :name, class: 'form-control' %>
+  <%= form.label :age %>
+  <%= form.text_field :age, class: 'form-control' %>
+  <%= form.label :description %>
+  <%= form.text_field :description, class: 'form-control' %>
+  <%= form.label :image %>
+  <%= form.text_field :image, class: 'form-control' %>
+   <%= form.submit %>
+<% end %>

@@ -1,0 +1,25 @@
+
+
+<li><%= link_to 'Create Category', new_category_path%></li>
+<li><%= link_to 'Main page', main_index_path%></li>
+
+
+  <div >
+    <table >
+      <thead >
+      <tr>
+        <th >Category Name</th>
+        <th>Action</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @categories.each do |category| %>
+        <tr>
+          <td><%= category.name %></td>
+          <td><%= link_to 'Show', category_path(category.id) %></td>
+
+
+      <% end %>
+      </table>
+  </div>
+

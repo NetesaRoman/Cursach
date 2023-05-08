@@ -1,0 +1,25 @@
+
+
+<li><%= link_to 'Create movie', new_movie_path%></li>
+<li><%= link_to 'Main page', main_index_path%></li>
+
+
+  <div >
+    <table >
+      <thead >
+      <tr>
+        <th >Movie Name</th>
+        <th>Action</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @movies.each do |movie| %>
+        <tr>
+          <td><%= movie.title %></td>
+          <td><%= link_to 'Show', movie_path(movie.id) %></td>
+
+
+      <% end %>
+      </table>
+  </div>
+

@@ -1,0 +1,43 @@
+
+
+
+  <div >
+    <%= form_with(id: 'modelForm', model: @movie, local: true) do |form| %>
+      <div >
+        <%= form.label :title %>
+        <%= form.text_field :title, class: 'form-control' %>
+        <%= form.label :url %>
+        <%= form.text_field :url, class: 'form-control' %>
+        <%= form.label :description %>
+        <%= form.text_field :description, class: 'form-control' %>
+        <%= form.label :tagline %>
+        <%= form.text_field :tagline, class: 'form-control' %>
+        <%= form.label :poster %>
+        <%= form.text_field :poster, class: 'form-control' %>
+        <%= form.label :year %>
+        <%= form.text_field :year, class: 'form-control' %>
+        <%= form.label :country %>
+        <%= form.text_field :country, class: 'form-control' %>
+        <%= form.label :world_premier %>
+        <%= form.text_field :world_premier, class: 'form-control' %>
+        <%= form.label :budget %>
+        <%= form.text_field :budget, class: 'form-control' %>
+        <%= form.label :fees_in_usa %>
+        <%= form.text_field :fees_in_usa, class: 'form-control' %>
+        <%= form.label :fees_in_world %>
+        <%= form.text_field :fees_in_world, class: 'form-control' %>
+        <%= form.label :category_id %>
+        <%= form.text_field :category_id, class: 'form-control' %>
+        <%= form.label :draft %>
+        <%= form.text_field :draft, class: 'form-control' %>
+
+
+      </div>
+
+      <div >
+        <%= form.submit class: 'form-control btn-primary' %>
+      </div>
+    <% end %>
+  </div>
+</div>
+

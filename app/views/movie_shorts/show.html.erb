@@ -1,0 +1,25 @@
+<div>
+
+  <div>
+
+    <h2>Title:</h2>
+    <p><%= @movie_short.title %></p>
+    <h2>Url:</h2>
+    <p><%= @movie_short.image %></p>
+    <h2>Id:</h2>
+    <p><%= @movie_short.id %></p>
+    <h2>Description:</h2>
+    <p><%= @movie_short.description %></p>
+    <h2>Movie:</h2>
+    <p><%= @movie_short.movie.title %></p>
+
+
+
+  </div>
+  <%= link_to "Back to list", root_path %>
+
+  <div id="root_buttons" >
+    <td><%= button_to 'Edit', edit_movie_short_path(@movie_short), method: :get, id: 'rootBtn' %></td>
+    <td><%= button_to 'Remove', movie_short_path(@movie_short), method: :delete, data: { confirm: 'Are you sure?' }, id: 'rootBtn' %></td>
+  </div>
+</div>

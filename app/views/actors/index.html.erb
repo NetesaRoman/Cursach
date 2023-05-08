@@ -1,0 +1,25 @@
+
+
+<li><%= link_to 'Create Actors', new_actor_path%></li>
+<li><%= link_to 'Main page', main_index_path%></li>
+
+
+  <div >
+    <table >
+      <thead >
+      <tr>
+        <th >Author Name</th>
+        <th>Action</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @actors.each do |actor| %>
+        <tr>
+          <td><%= actor.name %></td>
+          <td><%= link_to 'Show', actor_path(actor.id) %></td>
+
+
+      <% end %>
+      </table>
+  </div>
+

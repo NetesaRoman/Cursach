@@ -1,0 +1,27 @@
+<div>
+
+  <div>
+
+    <h2>Name:</h2>
+    <p><%= @review.name %></p>
+    <h2>Url:</h2>
+    <p><%= @review.email %></p>
+    <h2>Id:</h2>
+    <p><%= @review.id %></p>
+    <h2>Description:</h2>
+    <p><%= @review.text %></p>
+    <h2>Parent:</h2>
+    <p><%= @review.parent.name %></p>
+    <h2>Movie:</h2>
+    <p><%= @review.movie.title %></p>
+
+
+
+  </div>
+  <%= link_to "Back to list", root_path %>
+
+  <div id="root_buttons" >
+    <td><%= button_to 'Edit', edit_review_path(@review), method: :get, id: 'rootBtn' %></td>
+    <td><%= button_to 'Remove', review_path(@review), method: :delete, data: { confirm: 'Are you sure?' }, id: 'rootBtn' %></td>
+  </div>
+</div>

@@ -1,0 +1,25 @@
+
+
+<li><%= link_to 'Create ratings', new_rating_path%></li>
+<li><%= link_to 'Main page', main_index_path%></li>
+
+
+  <div >
+    <table >
+      <thead >
+      <tr>
+        <th >Rating ip</th>
+        <th>Action</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @ratings.each do |rating| %>
+        <tr>
+          <td><%= rating.ip %></td>
+          <td><%= link_to 'Show', rating_path(rating.id) %></td>
+
+
+      <% end %>
+      </table>
+  </div>
+

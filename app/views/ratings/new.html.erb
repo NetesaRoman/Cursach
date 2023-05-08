@@ -1,0 +1,21 @@
+
+
+
+  <div >
+    <%= form_with(id: 'modelForm', model: @rating, local: true) do |form| %>
+      <div >
+        <%= form.label :ip %>
+        <%= form.text_field :ip, class: 'form-control' %>
+        <%= form.label :star_id %>
+        <%= form.text_field :star_id, class: 'form-control' %>
+        <%= form.label :movie_id %>
+        <%= form.text_field :movie_id, class: 'form-control' %>
+      </div>
+
+      <div >
+        <%= form.submit class: 'form-control btn-primary' %>
+      </div>
+    <% end %>
+  </div>
+</div>
+

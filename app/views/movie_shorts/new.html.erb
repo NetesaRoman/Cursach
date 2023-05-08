@@ -1,0 +1,24 @@
+
+
+
+  <div >
+    <%= form_with(id: 'modelForm', model: @movie_short, local: true) do |form| %>
+      <div >
+        <%= form.label :title %>
+        <%= form.text_field :title, class: 'form-control' %>
+        <%= form.label :image %>
+        <%= form.text_field :image, class: 'form-control' %>
+        <%= form.label :description %>
+        <%= form.text_field :description, class: 'form-control' %>
+        <%= form.label :movie_id %>
+        <%= form.text_field :movie_id, class: 'form-control' %>
+
+      </div>
+
+      <div >
+        <%= form.submit class: 'form-control btn-primary' %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
