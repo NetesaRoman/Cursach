@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_06_133002) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_11_112835) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -40,6 +40,33 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_06_133002) do
     t.text "description"
     t.string "url"
     t.index ["url"], name: "index_genres_on_url", unique: true
+  end
+
+  create_table "movie_actors", force: :cascade do |t|
+    t.bigint "movie_id", null: false
+    t.bigint "actor_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["actor_id"], name: "index_movie_actors_on_actor_id"
+    t.index ["movie_id"], name: "index_movie_actors_on_movie_id"
+  end
+
+  create_table "movie_directors", force: :cascade do |t|
+    t.bigint "movie_id", null: false
+    t.bigint "actor_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["actor_id"], name: "index_movie_directors_on_actor_id"
+    t.index ["movie_id"], name: "index_movie_directors_on_movie_id"
+  end
+
+  create_table "movie_genres", force: :cascade do |t|
+    t.bigint "movie_id"
+    t.bigint "genre_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["genre_id"], name: "index_movie_genres_on_genre_id"
+    t.index ["movie_id"], name: "index_movie_genres_on_movie_id"
   end
 
   create_table "movie_shorts", force: :cascade do |t|
@@ -105,6 +132,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_06_133002) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "movie_actors", "actors"
+  add_foreign_key "movie_actors", "movies"
+  add_foreign_key "movie_directors", "actors"
+  add_foreign_key "movie_directors", "movies"
+  add_foreign_key "movie_genres", "genres"
+  add_foreign_key "movie_genres", "movies"
   add_foreign_key "movie_shorts", "movies"
   add_foreign_key "movies", "categories"
   add_foreign_key "ratings", "movies"

@@ -3,6 +3,8 @@ class Genre < ApplicationRecord
   validates :description, presence: true
   validates :url, presence: true, length: { maximum: 150 }, uniqueness: true
 
+  has_many :movie_genres
+  has_many :movies, through: :movie_genres
   def to_s
     name
   end

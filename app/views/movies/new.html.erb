@@ -13,7 +13,7 @@
         <%= form.label :tagline %>
         <%= form.text_field :tagline, class: 'form-control' %>
         <%= form.label :poster %>
-        <%= form.text_field :poster, class: 'form-control' %>
+        <%= form.file_field :poster, class: 'form-control' %>
         <%= form.label :year %>
         <%= form.text_field :year, class: 'form-control' %>
         <%= form.label :country %>
@@ -30,6 +30,21 @@
         <%= form.text_field :category_id, class: 'form-control' %>
         <%= form.label :draft %>
         <%= form.text_field :draft, class: 'form-control' %>
+
+        <%= form.collection_check_boxes :genre_ids, Genre.all, :id, :name, checked: @movie.genre_ids, include_hidden: false do |cb| %>
+          <%= cb.check_box %>
+          <%= cb.label %>
+        <% end %>
+
+        <%= form.collection_check_boxes :actor_ids, Actor.all, :id, :name, checked: @movie.actor_ids, include_hidden: false do |cb| %>
+          <%= cb.check_box %>
+          <%= cb.label %>
+        <% end %>
+
+        <%= form.collection_check_boxes :director_ids, Actor.all, :id, :name, checked: @movie.director_ids, include_hidden: false do |cb| %>
+          <%= cb.check_box %>
+          <%= cb.label %>
+        <% end %>
 
 
       </div>

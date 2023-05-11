@@ -4,6 +4,12 @@ class Actor < ApplicationRecord
   validates :description, presence: true
   validates :image, presence: true
 
+  has_many :movie_actors
+  has_many :movies, through: :movie_actors
+
+  has_many :movie_directors
+  has_many :movies, through: :movie_directors
+
   def to_s
     name
   end

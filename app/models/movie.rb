@@ -15,10 +15,15 @@ class Movie < ApplicationRecord
 
 
   has_and_belongs_to_many :directors, class_name: 'Actor'
-  has_and_belongs_to_many :actors
 
+  has_many :movie_actors
+  has_many :actors, through: :movie_actors
 
-  has_and_belongs_to_many :genres
+  has_many :movie_directors
+  has_many :actors, through: :movie_directors
+
+  has_many :movie_genres
+  has_many :genres, through: :movie_genres
 
   def to_s
     title

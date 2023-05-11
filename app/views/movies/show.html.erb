@@ -11,7 +11,7 @@
     <h2>Tagline:</h2>
     <p><%= @movie.tagline %></p>
     <h2>Poster:</h2>
-    <p><%= @movie.poster %></p>
+    <p><%= image_tag @movie.poster %></p>
     <h2>Year:</h2>
     <p><%= @movie.year %></p>
     <h2>Country:</h2>
@@ -30,8 +30,19 @@
     <p><%= @movie.draft %></p>
     <h2>Description:</h2>
     <p><%= @movie.description %></p>
+    <h2>Genres</h2>
+    <% @movie.genres.each do |genre| %>
+      <p><%= genre.name %></p>
+      <% end %>
+    <h2>Actors</h2>
+    <% @movie.actors.each do |actor| %>
+      <p><%= actor.name %></p>
+    <% end %>
 
-
+    <h2>Directors</h2>
+    <% @movie.movie_directors.each do |director| %>
+      <p><%= director.actor.name %></p>
+    <% end %>
 
   </div>
   <%= link_to "Back to list", root_path %>
