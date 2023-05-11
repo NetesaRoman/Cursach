@@ -53,7 +53,7 @@ class MoviesController < ApplicationController
 
       director_ids = params[:movie][:director_ids] || []
       director_ids.each do |director_id|
-        @movie.movie_directors.create(actor_id: director_id)
+        @movie.movie_directors.create(director_id: director_id)
       end
     end
     redirect_to movies_path, allow_other_host: true

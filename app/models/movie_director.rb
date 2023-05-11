@@ -1,4 +1,4 @@
 class MovieDirector < ApplicationRecord
   belongs_to :movie
-  belongs_to :actor
+  belongs_to :director
 end

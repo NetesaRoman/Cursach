@@ -14,13 +14,13 @@ class Movie < ApplicationRecord
   belongs_to :category
 
 
-  has_and_belongs_to_many :directors, class_name: 'Actor'
+
 
   has_many :movie_actors
   has_many :actors, through: :movie_actors
 
   has_many :movie_directors
-  has_many :actors, through: :movie_directors
+  has_many :directors, through: :movie_directors
 
   has_many :movie_genres
   has_many :genres, through: :movie_genres

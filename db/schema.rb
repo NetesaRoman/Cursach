@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_11_112835) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_11_124014) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -33,6 +33,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_11_112835) do
     t.index ["url"], name: "index_categories_on_url", unique: true
   end
 
+  create_table "directors", force: :cascade do |t|
+    t.string "name", limit: 150, null: false
+    t.integer "age", null: false
+    t.text "description", null: false
+    t.string "image", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "genres", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -53,10 +62,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_11_112835) do
 
   create_table "movie_directors", force: :cascade do |t|
     t.bigint "movie_id", null: false
-    t.bigint "actor_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["actor_id"], name: "index_movie_directors_on_actor_id"
+    t.bigint "director_id", null: false
+    t.index ["director_id"], name: "index_movie_directors_on_director_id"
     t.index ["movie_id"], name: "index_movie_directors_on_movie_id"
   end
 
@@ -134,7 +143,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_11_112835) do
 
   add_foreign_key "movie_actors", "actors"
   add_foreign_key "movie_actors", "movies"
-  add_foreign_key "movie_directors", "actors"
+  add_foreign_key "movie_directors", "directors"
   add_foreign_key "movie_directors", "movies"
   add_foreign_key "movie_genres", "genres"
   add_foreign_key "movie_genres", "movies"

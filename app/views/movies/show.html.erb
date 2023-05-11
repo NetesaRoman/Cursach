@@ -40,8 +40,8 @@
     <% end %>
 
     <h2>Directors</h2>
-    <% @movie.movie_directors.each do |director| %>
-      <p><%= director.actor.name %></p>
+    <% @movie.directors.each do |director| %>
+      <p><%= director.name %></p>
     <% end %>
 
   </div>
