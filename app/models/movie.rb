@@ -33,4 +33,12 @@ class Movie < ApplicationRecord
   def get_review
     reviews.where(parent_id: nil)
   end
+
+  def self.ransackable_attributes(auth_object = nil)
+    %w[title genres_id_eq_any movie_genres genres genre_ids  year_eq_any year]
+  end
+
+  def self.ransackable_associations(auth_object = nil)
+    ['genres']
+  end
 end

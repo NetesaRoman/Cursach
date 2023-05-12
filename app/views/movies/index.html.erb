@@ -3,6 +3,27 @@
 <li><%= link_to 'Create movie', new_movie_path%></li>
 <li><%= link_to 'Main page', main_index_path%></li>
 
+<%= search_form_for @q do |f| %>
+  <%= f.text_field :title_cont, placeholder: 'Search' %>
+
+
+  <% Genre.all.each do |genre| %>
+    <%= f.check_box :genres_id_eq_any, { multiple: true }, genre.id, nil %>
+    <%= label_tag "genre_#{genre.id}", genre.name %>
+  <% end %>
+
+
+  <% Movie.distinct.pluck(:year).sort.each do |year| %>
+    <%= f.check_box :year_eq_any, { multiple: true }, year, nil %>
+    <%= label_tag "year_#{year}", year %>
+  <% end %>
+
+
+  <%= f.submit 'Search' %>
+<% end %>
+
+
+
 
   <div >
     <table >
@@ -21,5 +42,8 @@
 
       <% end %>
       </table>
+
+    <!-- Пагинация -->
+    <%= will_paginate @movies %>
   </div>
 

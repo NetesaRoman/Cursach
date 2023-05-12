@@ -8,4 +8,8 @@ class Genre < ApplicationRecord
   def to_s
     name
   end
+
+  def self.ransackable_attributes(auth_object = nil)
+    %w[name id description url]
+  end
 end
