@@ -14,7 +14,7 @@ class Movie < ApplicationRecord
   belongs_to :category
 
 
-
+  has_one :movie_short  # Добавляем ассоциацию с MovieShort
 
   has_many :movie_actors
   has_many :actors, through: :movie_actors
@@ -39,6 +39,8 @@ class Movie < ApplicationRecord
   end
 
   def self.ransackable_associations(auth_object = nil)
-    ['genres' 'category']
+    %w[genres category movie_genres]
   end
+
+
 end

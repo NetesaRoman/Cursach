@@ -7,6 +7,8 @@
   <%= f.text_field :title_cont, placeholder: 'Search' %>
 
 
+
+
   <% Genre.all.each do |genre| %>
     <%= f.check_box :genres_id_eq_any, { multiple: true }, genre.id, nil %>
     <%= label_tag "genre_#{genre.id}", genre.name %>
@@ -40,16 +42,16 @@
       </tr>
       </thead>
       <tbody>
-      <% @movies.each do |movie| %>
+      <% @movie_shorts.each do |movie| %>
         <tr>
           <td><%= movie.title %></td>
-          <td><%= link_to 'Show', movie_path(movie.id) %></td>
+          <td><%= link_to 'Show', movie_path(movie.movie_id) %></td>
 
 
       <% end %>
       </table>
 
     <!-- Пагинация -->
-    <%= will_paginate @movies %>
+    <%= will_paginate @movie_shorts %>
   </div>
 

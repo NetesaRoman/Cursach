@@ -4,7 +4,12 @@ class MoviesController < ApplicationController
   def index
 
     @q = Movie.where(draft: true).ransack(params[:q])
-    @movies = @q.result(distinct: true).paginate(page: params[:page], per_page: 5)
+    @movies = @q.result(distinct: true)
+
+
+
+    @movie_shorts = MovieShort.where(movie_id: @movies.pluck(:id)).paginate(page: params[:page], per_page: 5)
+
   end
 
   def show
