@@ -42,16 +42,16 @@
       </tr>
       </thead>
       <tbody>
-      <% @movie_shorts.each do |movie| %>
+      <% @movies.each do |movie| %>
         <tr>
           <td><%= movie.title %></td>
-          <td><%= link_to 'Show', movie_path(movie.movie_id) %></td>
+          <td><%= link_to 'Show', movie_path(movie.id) %></td>
 
 
       <% end %>
       </table>
 
     <!-- Пагинация -->
-    <%= will_paginate @movie_shorts %>
+    <%= will_paginate @movies %>
   </div>
 
