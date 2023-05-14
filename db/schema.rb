@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_12_205500) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_14_111545) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -42,6 +42,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_12_205500) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "dislikes", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "movie_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["movie_id"], name: "index_dislikes_on_movie_id"
+    t.index ["user_id", "movie_id"], name: "index_dislikes_on_user_id_and_movie_id", unique: true
+    t.index ["user_id"], name: "index_dislikes_on_user_id"
+  end
+
   create_table "genres", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -49,6 +59,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_12_205500) do
     t.text "description"
     t.string "url"
     t.index ["url"], name: "index_genres_on_url", unique: true
+  end
+
+  create_table "likes", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "movie_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["movie_id"], name: "index_likes_on_movie_id"
+    t.index ["user_id", "movie_id"], name: "index_likes_on_user_id_and_movie_id", unique: true
+    t.index ["user_id"], name: "index_likes_on_user_id"
   end
 
   create_table "movie_actors", force: :cascade do |t|
@@ -103,20 +123,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_12_205500) do
     t.integer "category_id"
     t.string "url"
     t.boolean "draft", default: false
-  end
-
-  create_table "rating_stars", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "value", default: 0
-  end
-
-  create_table "ratings", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "ip"
-    t.integer "star_id"
-    t.integer "movie_id"
+    t.integer "likes", default: 0
+    t.integer "dislikes", default: 0
   end
 
   create_table "reviews", force: :cascade do |t|
@@ -150,8 +158,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_12_205500) do
   add_foreign_key "movie_genres", "movies"
   add_foreign_key "movie_shorts", "movies"
   add_foreign_key "movies", "categories"
-  add_foreign_key "ratings", "movies"
-  add_foreign_key "ratings", "rating_stars", column: "star_id"
   add_foreign_key "reviews", "movies"
   add_foreign_key "reviews", "reviews", column: "parent_id"
 end

@@ -37,14 +37,6 @@ class AddFieldsToModels < ActiveRecord::Migration[7.0]
     add_column :movie_shorts, :movie_id, :integer
     add_foreign_key :movie_shorts, :movies
 
-    add_column :rating_stars, :value, :integer, default: 0
-
-
-    add_column :ratings, :ip, :string
-    add_column :ratings, :star_id, :integer
-    add_column :ratings, :movie_id, :integer
-    add_foreign_key :ratings, :rating_stars, column: :star_id
-    add_foreign_key :ratings, :movies, column: :movie_id
 
     add_column :reviews, :email, :string
     add_column :reviews, :name, :string

@@ -1,5 +1,6 @@
 class MoviesController < ApplicationController
   before_action :authenticate_user!
+  before_action :find_movie, only: [:like, :dislike]
 
   def index
 
@@ -11,6 +12,8 @@ class MoviesController < ApplicationController
   def show
     @movie = Movie.find(params[:id])
     @movie_shorts = @movie.movie_shorts
+    @likes = @movie.likes.count
+    @dislikes = @movie.dislikes.count
   end
 
   def edit
@@ -79,6 +82,40 @@ class MoviesController < ApplicationController
     end
   end
 
+
+  def like
+    @like = Like.find_or_initialize_by(movie: @movie, user: current_user)
+    @dislike = Dislike.find_by(movie: @movie, user: current_user)
+    @dislike.destroy if @dislike.present?
+
+    if @like.new_record?
+      @like.save
+      flash[:success] = "You liked the movie."
+    else
+      flash[:notice] = "You already liked the movie."
+    end
+
+    redirect_to movie_path(@movie)
+  end
+
+  def dislike
+    @dislike = Dislike.find_or_initialize_by(movie: @movie, user: current_user)
+    @like = Like.find_by(movie: @movie, user: current_user)
+    @like.destroy if @like.present?
+
+    if @dislike.new_record?
+      @dislike.save
+      flash[:success] = "You disliked the movie."
+    else
+      flash[:notice] = "You already disliked the movie."
+    end
+
+    redirect_to movie_path(@movie)
+  end
+
+  def find_movie
+    @movie = Movie.find(params[:id])
+  end
   def destroy
     if current_user.admin?
       @movie = Movie.find(params[:id])

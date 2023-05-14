@@ -4,6 +4,7 @@ class Movie < ApplicationRecord
   validates :description, presence: true
   validates :poster, presence: true
   validates :year, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
+
   validates :country, presence: true
   validates :world_premier, presence: true
   validates :budget, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
@@ -25,9 +26,13 @@ class Movie < ApplicationRecord
   has_many :movie_genres
   has_many :genres, through: :movie_genres
 
+  has_many :likes
+  has_many :dislikes
+
   def to_s
     title
   end
+
 
 
   def get_review

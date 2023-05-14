@@ -4,6 +4,14 @@
 
     <h2>Name:</h2>
     <p><%= @movie.title %></p>
+
+    <%= button_to 'Like', like_movie_path(@movie), method: :post %>
+    <%= button_to "Dislike", dislike_movie_path(@movie), method: :post %>
+
+    <h2>Likes:</h2>
+    <p><%= @likes %></p>
+    <h2>Dislikes:</h2>
+    <p><%= @dislikes %></p>
     <h2>Url:</h2>
     <p><%= @movie.url %></p>
     <h2>Id:</h2>
@@ -46,11 +54,22 @@
 
     <h2>Shorts</h2>
     <%= link_to 'Create Movie Short', new_movie_short_path(movie_id: @movie.id) %>
-    <% @movie_shorts.each do |movie_short| %>
+    <table >
+      <thead >
+      <tr>
+        <th >Shorts Name</th>
+        <th>Action</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @movie_shorts.each do |movie_short| %>
+        <tr>
+          <td><%= movie_short.title %></td>
+          <td><%= button_to 'delete', movie_short_path(movie_short.id) , method: :delete%></td>
 
-      <%= movie_short.title %>
 
-    <% end %>
+      <% end %>
+      </table>
 
 
   </div>

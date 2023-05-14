@@ -13,9 +13,13 @@ Rails.application.routes.draw do
   resources :categories
   resources :genres
   resources :movie_shorts
-  resources :movies
-  resources :rating_stars
-  resources :ratings
+  resources :movies do
+    member do
+      post 'like', to: 'movies#like'
+      post 'dislike', to: 'movies#dislike'
+    end
+  end
+
   resources :reviews
 
   root "main#index"
