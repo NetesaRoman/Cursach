@@ -10,6 +10,7 @@ class MoviesController < ApplicationController
 
   def show
     @movie = Movie.find(params[:id])
+    @movie_shorts = @movie.movie_shorts
   end
 
   def edit
@@ -92,6 +93,6 @@ class MoviesController < ApplicationController
 
   def movie_params
     params.require(:movie).permit(:title, :description, :poster, :tagline, :year, :country, :world_premier,
-                                  :budget, :fees_in_usa, :fees_in_world, :category_id, :url, :draft,  actor_ids: [], director_ids: [])
+                                  :budget, :fees_in_usa, :fees_in_world, :category_id, :url, :draft,  actor_ids: [], genre_ids: [], director_ids: [])
   end
 end

@@ -44,6 +44,15 @@
       <p><%= director.name %></p>
     <% end %>
 
+    <h2>Shorts</h2>
+    <%= link_to 'Create Movie Short', new_movie_short_path(movie_id: @movie.id) %>
+    <% @movie_shorts.each do |movie_short| %>
+
+      <%= movie_short.title %>
+
+    <% end %>
+
+
   </div>
   <%= link_to "Back to list", root_path %>
 

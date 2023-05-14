@@ -21,13 +21,22 @@ class MovieShortsController < ApplicationController
   end
 
   def new
-    @movie_short= MovieShort.new
+    @movie = Movie.find(params[:movie_id])
+    @movie_short = MovieShort.new
   end
 
   def create
-    @movie_short= MovieShort.create(movie_short_params)
+    @movie_short = MovieShort.new(movie_short_params)
+    @movie = Movie.find(params[:movie_short][:movie_id])
+    @movie_short.movie = @movie
 
-    redirect_to movie_shorts_path, allow_other_host: true
+    if @movie_short.save
+      # Обработка успешного сохранения
+      redirect_to movie_path(@movie)
+    else
+      # Обработка ошибок при сохранении
+      render :new
+    end
   end
 
   def destroy
