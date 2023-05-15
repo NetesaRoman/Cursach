@@ -1,0 +1,19 @@
+<%= form_with(model: Review.new, url: reviews_path(@movie)) do |form| %>
+  <%= form.hidden_field :parent_id, value: parent_id %>
+
+
+
+  <%= form.hidden_field :name, value: current_user.email  %>
+
+  <%= form.hidden_field :email, value: current_user.email  %>
+
+  <%= form.hidden_field :movie_id, value: @movie.id %>
+
+
+  <%= form.label :text %>
+  <%= form.text_area :text %>
+
+
+
+  <%= form.submit 'Submit' %>
+<% end %>

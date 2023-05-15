@@ -25,20 +25,27 @@ class ReviewsController < ApplicationController
   end
 
   def create
-    @review= Review.create(review_params)
+    @review = Review.new(review_params)
+    @movie = Movie.find(review_params[:movie_id])
+    if @review.save
+      flash[:success] = "Review created successfully."
+    else
+      flash[:error] = "Error creating review."
+    end
 
-    redirect_to reviews_path, allow_other_host: true
+    redirect_to movie_path(@movie)
   end
 
   def destroy
     @review= Review.find(params[:id])
     @review.destroy
 
+
     redirect_to reviews_path, allow_other_host: true
   end
 
   private
   def review_params
-    params.require(:review).permit(:email, :name, :text, parent_id, movie_id)
+    params.require(:review).permit(:email, :name, :text, :parent_id, :movie_id)
   end
 end

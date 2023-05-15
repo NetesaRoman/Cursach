@@ -72,6 +72,21 @@
       </table>
 
 
+
+
+    <div>
+      <h2>Reviews</h2>
+
+      <% render 'review_form', parent_id: nil %>
+
+      <% @movie.reviews.where(parent_id: nil).each do |review| %>
+        <%= render 'review',review: review  %>
+      <% end %>
+    </div>
+
+
+
+
   </div>
   <%= link_to "Back to list", root_path %>
 

@@ -1,8 +1,5 @@
 Rails.application.routes.draw do
 
-
-
-
   devise_for :users
 
   get "ping", to: "debug#index"
@@ -17,6 +14,7 @@ Rails.application.routes.draw do
     member do
       post 'like', to: 'movies#like'
       post 'dislike', to: 'movies#dislike'
+      post 'reviews', to: 'reviews#create', as: :create_review
     end
   end
 

@@ -1,0 +1,12 @@
+<div class="review">
+  <p><strong><%= review.name %></strong></p>
+  <p><%= review.text %></p>
+
+  <%= render  'review_form', parent_id: review.parent_id %>
+
+  <% review.replies.each do |nested_review| %>
+    <%= render  'review',  review: nested_review %>
+  <% end %>
+
+
+</div>
