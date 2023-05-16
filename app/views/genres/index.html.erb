@@ -1,7 +1,7 @@
 
 
 <li><%= link_to 'Create genre', new_genre_path%></li>
-<li><%= link_to 'Main page', main_index_path%></li>
+<li><%= link_to 'Back to movies', movies_path%></li>
 
 
   <div >
@@ -16,7 +16,7 @@
       <% @genres.each do |genre| %>
         <tr>
           <td><%= genre.name %></td>
-          <td><%= link_to 'Show', genre_path(genre.id) %></td>
+          <td><%= button_to 'Delete', genre_path(genre.id), method: :delete, data: { confirm: 'Are you sure?' } %></td>
 
 
       <% end %>

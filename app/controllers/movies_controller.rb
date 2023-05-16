@@ -7,6 +7,8 @@ class MoviesController < ApplicationController
     @q = Movie.where(draft: true).ransack(params[:q])
     @movies = @q.result(distinct: true).paginate(page: params[:page], per_page: 5)
 
+    @recent = Movie.where(draft: true).where('created_at >= ?', 1.week.ago).order(created_at: :desc)
+
   end
 
   def show
@@ -17,6 +19,9 @@ class MoviesController < ApplicationController
   end
 
   def edit
+    unless current_user.admin
+      redirect_to movies_path, allow_other_host: true
+    end
 
       @movie = Movie.find(params[:id])
 
@@ -24,13 +29,12 @@ class MoviesController < ApplicationController
   end
 
   def update
-    if current_user.admin?
+
       @movie = Movie.find(params[:id])
 
       @movie.update(movie_params)
 
 
-    end
     redirect_to movie_path(@movie)
   end
 

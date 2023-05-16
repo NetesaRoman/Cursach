@@ -1,6 +1,11 @@
 
 
 <li><%= link_to 'Create movie', new_movie_path%></li>
+<li><%= link_to 'Manage genres', genres_path%></li>
+<li><%= link_to 'Manage categories', categories_path%></li>
+<li><%= link_to 'Manage actors', actors_path%></li>
+
+
 <li><%= link_to 'Main page', main_index_path%></li>
 
 <%= search_form_for @q do |f| %>
@@ -55,3 +60,23 @@
     <%= will_paginate @movies %>
   </div>
 
+<div >
+  <h2>New films</h2>
+  <table >
+    <thead >
+    <tr>
+      <th >Movie Name</th>
+      <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @recent.each do |movie| %>
+      <tr>
+        <td><%= movie.title %></td>
+        <td><%= link_to 'Show', movie_path(movie.id) %></td>
+
+
+    <% end %>
+    </table>
+
+</div>

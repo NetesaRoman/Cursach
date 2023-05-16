@@ -9,6 +9,10 @@ class CategoriesController < ApplicationController
   end
 
   def edit
+    unless current_user.admin
+      redirect_to movies_path, allow_other_host: true
+    end
+
     @category= Category.find(params[:id])
   end
 
@@ -21,6 +25,10 @@ class CategoriesController < ApplicationController
   end
 
   def new
+    unless current_user.admin
+      redirect_to movies_path, allow_other_host: true
+    end
+
     @category= Category.new
   end
 
@@ -31,6 +39,10 @@ class CategoriesController < ApplicationController
   end
 
   def destroy
+    unless current_user.admin
+      redirect_to movies_path, allow_other_host: true
+    end
+
     @category= Category.find(params[:id])
     @category.destroy
 

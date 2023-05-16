@@ -75,9 +75,10 @@
 
 
     <div>
+
       <h2>Reviews</h2>
 
-      <% render 'review_form', parent_id: nil %>
+      <%= render partial: 'review_form', locals: { parent_id: nil } %>
 
       <% @movie.reviews.where(parent_id: nil).each do |review| %>
         <%= render 'review',review: review  %>

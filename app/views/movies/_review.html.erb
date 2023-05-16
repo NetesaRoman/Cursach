@@ -2,7 +2,7 @@
   <p><strong><%= review.name %></strong></p>
   <p><%= review.text %></p>
 
-  <%= render  'review_form', parent_id: review.parent_id %>
+  <%= render partial: 'review_form', locals: { parent_id: review.id } %>
 
   <% review.replies.each do |nested_review| %>
     <%= render  'review',  review: nested_review %>

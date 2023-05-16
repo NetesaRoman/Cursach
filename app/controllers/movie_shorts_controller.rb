@@ -9,6 +9,10 @@ class MovieShortsController < ApplicationController
   end
 
   def edit
+    unless current_user.admin
+      redirect_to movies_path, allow_other_host: true
+    end
+
     @movie_short= MovieShort.find(params[:id])
   end
 
@@ -21,6 +25,10 @@ class MovieShortsController < ApplicationController
   end
 
   def new
+    unless current_user.admin
+      redirect_to movies_path, allow_other_host: true
+    end
+
     @movie = Movie.find(params[:movie_id])
     @movie_short = MovieShort.new
   end
@@ -40,6 +48,10 @@ class MovieShortsController < ApplicationController
   end
 
   def destroy
+    unless current_user.admin
+      redirect_to movies_path, allow_other_host: true
+    end
+
     @movie_short= MovieShort.find(params[:id])
     @movie_short.destroy
 

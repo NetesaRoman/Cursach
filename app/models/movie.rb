@@ -15,21 +15,21 @@ class Movie < ApplicationRecord
   belongs_to :category
 
 
-  has_many :movie_shorts  # Добавляем ассоциацию с MovieShort
+  has_many :movie_shorts,dependent: :destroy  # Добавляем ассоциацию с MovieShort
 
-  has_many :movie_actors
+  has_many :movie_actors,dependent: :destroy
   has_many :actors, through: :movie_actors
 
-  has_many :movie_directors
+  has_many :movie_directors,dependent: :destroy
   has_many :directors, through: :movie_directors
 
-  has_many :movie_genres
+  has_many :movie_genres,dependent: :destroy
   has_many :genres, through: :movie_genres
 
-  has_many :likes
-  has_many :dislikes
+  has_many :likes, dependent: :destroy
+  has_many :dislikes, dependent: :destroy
 
-  has_many :reviews
+  has_many :reviews, dependent: :destroy
 
   def to_s
     title

@@ -1,7 +1,7 @@
 
 
 <li><%= link_to 'Create Category', new_category_path%></li>
-<li><%= link_to 'Main page', main_index_path%></li>
+<li><%= link_to 'Back to movies', movies_path%></li>
 
 
   <div >
@@ -16,7 +16,7 @@
       <% @categories.each do |category| %>
         <tr>
           <td><%= category.name %></td>
-          <td><%= link_to 'Show', category_path(category.id) %></td>
+          <td><%= button_to 'Delete', category_path(category.id), method: :delete, data: { confirm: 'Are you sure?' }  %></td>
 
 
       <% end %>

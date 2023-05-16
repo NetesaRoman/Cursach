@@ -9,10 +9,16 @@ class ActorsController < ApplicationController
   end
 
   def edit
+    unless current_user.admin
+      redirect_to movies_path, allow_other_host: true
+    end
+
     @actor= Actor.find(params[:id])
   end
 
   def update
+
+
     @actor= Actor.find(params[:id])
 
     @actor.update(actor_params)
@@ -21,6 +27,10 @@ class ActorsController < ApplicationController
   end
 
   def new
+    unless current_user.admin
+      redirect_to movies_path, allow_other_host: true
+    end
+
     @actor= Actor.new
 
 
@@ -33,6 +43,10 @@ class ActorsController < ApplicationController
   end
 
   def destroy
+    unless current_user.admin
+      redirect_to movies_path, allow_other_host: true
+    end
+
     @actor= Actor.find(params[:id])
     @actor.destroy
 

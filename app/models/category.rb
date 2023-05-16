@@ -3,7 +3,7 @@ class Category < ApplicationRecord
   validates :description, presence: true
   validates :url, presence: true, length: { maximum: 150 }, uniqueness: true
 
-  has_many :movies
+  has_many :movies, dependent: :nullify
 
   def to_s
     name
