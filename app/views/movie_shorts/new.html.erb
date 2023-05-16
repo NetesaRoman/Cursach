@@ -7,7 +7,7 @@
         <%= form.label :title %>
         <%= form.text_field :title, class: 'form-control' %>
         <%= form.label :image %>
-        <%= form.text_field :image, class: 'form-control' %>
+        <%= form.file_field :image, class: 'form-control' %>
         <%= form.label :description %>
         <%= form.text_field :description, class: 'form-control' %>
         <%= form.hidden_field :movie_id, value: @movie.id %>

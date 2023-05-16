@@ -1,0 +1,26 @@
+
+
+<li><%= link_to 'Create Directors', new_director_path%></li>
+<li><%= link_to 'Back to movies', movies_path%></li>
+
+
+  <div >
+    <table >
+      <thead >
+      <tr>
+        <th >Director Name</th>
+        <th>Action</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @directors.each do |director| %>
+        <tr>
+          <td><%= director.name %></td>
+          <td><%= image_tag director.image %></td>
+          <td><%= button_to 'Delete', director_path(director.id), method: :delete, data: { confirm: 'Are you sure?' }  %></td>
+
+
+      <% end %>
+      </table>
+  </div>
+

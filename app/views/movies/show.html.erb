@@ -65,6 +65,8 @@
       <% @movie_shorts.each do |movie_short| %>
         <tr>
           <td><%= movie_short.title %></td>
+          <td><%= image_tag movie_short.image %></td>
+
           <td><%= button_to 'delete', movie_short_path(movie_short.id) , method: :delete%></td>
 
 

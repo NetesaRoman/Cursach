@@ -38,11 +38,23 @@ class MovieShortsController < ApplicationController
     @movie = Movie.find(params[:movie_short][:movie_id])
     @movie_short.movie = @movie
 
+
+
     if @movie_short.save
-      # Обработка успешного сохранения
-      redirect_to movie_path(@movie)
+      # Загрузка файла на сервер
+      uploaded_file = params[:movie_short][:image]
+      file_path = Rails.root.join('public', 'shorts', uploaded_file.original_filename)
+      File.open(file_path, 'wb') do |file|
+        file.write(uploaded_file.read)
+      end
+
+      # Сохранение пути к файлу в базе данных
+      @movie_short.image = "/shorts/#{uploaded_file.original_filename}"
+      @movie_short.save
+
+
+      redirect_to movie_path(@movie), allow_other_host: true
     else
-      # Обработка ошибок при сохранении
       render :new
     end
   end

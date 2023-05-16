@@ -39,7 +39,23 @@ class ActorsController < ApplicationController
   def create
     @actor= Actor.create(actor_params)
 
-    redirect_to actors_path, allow_other_host: true
+    if @actor.save
+      # Загрузка файла на сервер
+      uploaded_file = params[:actor][:image]
+      file_path = Rails.root.join('public', 'actors', uploaded_file.original_filename)
+      File.open(file_path, 'wb') do |file|
+        file.write(uploaded_file.read)
+      end
+
+      # Сохранение пути к файлу в базе данных
+      @actor.image = "/actors/#{uploaded_file.original_filename}"
+      @actor.save
+
+
+      redirect_to actors_path, allow_other_host: true
+    else
+      render :new
+    end
   end
 
   def destroy

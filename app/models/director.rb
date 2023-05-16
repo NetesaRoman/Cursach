@@ -4,7 +4,7 @@ class Director < ApplicationRecord
   validates :description, presence: true
   validates :image, presence: true
 
-  has_many :movie_directors
+  has_many :movie_directors,dependent: :destroy
   has_many :movies, through: :movie_directors
 
 

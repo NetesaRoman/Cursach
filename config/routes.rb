@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   resources :actors
   resources :categories
   resources :genres
+  resources :directors
   resources :movie_shorts
   resources :movies do
     member do

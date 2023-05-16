@@ -1,9 +1,11 @@
 
-
+<% if current_user.admin %>
 <li><%= link_to 'Create movie', new_movie_path%></li>
 <li><%= link_to 'Manage genres', genres_path%></li>
 <li><%= link_to 'Manage categories', categories_path%></li>
 <li><%= link_to 'Manage actors', actors_path%></li>
+<li><%= link_to 'Manage directors', directors_path%></li>
+<% end %>
 
 
 <li><%= link_to 'Main page', main_index_path%></li>

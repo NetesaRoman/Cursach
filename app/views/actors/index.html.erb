@@ -16,6 +16,7 @@
       <% @actors.each do |actor| %>
         <tr>
           <td><%= actor.name %></td>
+          <td><%= image_tag actor.image %></td>
           <td><%= button_to 'Delete', actor_path(actor.id), method: :delete, data: { confirm: 'Are you sure?' }  %></td>
 
 
