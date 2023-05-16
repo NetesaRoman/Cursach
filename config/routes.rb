@@ -2,9 +2,6 @@ Rails.application.routes.draw do
 
   devise_for :users
 
-  get "ping", to: "debug#index"
-  get "ping_admin", to: "debug#admin"
-
   resources :main
   resources :actors
   resources :categories
