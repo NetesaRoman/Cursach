@@ -1,100 +1,132 @@
-<div>
-
-  <div>
-
-    <h2>Name:</h2>
-    <p><%= @movie.title %></p>
-
-    <%= button_to 'Like', like_movie_path(@movie), method: :post %>
-    <%= button_to "Dislike", dislike_movie_path(@movie), method: :post %>
-
-    <h2>Likes:</h2>
-    <p><%= @likes %></p>
-    <h2>Dislikes:</h2>
-    <p><%= @dislikes %></p>
-    <h2>Url:</h2>
-    <p><%= @movie.url %></p>
-    <h2>Id:</h2>
-    <p><%= @movie.id %></p>
-    <h2>Tagline:</h2>
-    <p><%= @movie.tagline %></p>
-    <h2>Poster:</h2>
-    <p><%= image_tag @movie.poster %></p>
-    <h2>Year:</h2>
-    <p><%= @movie.year %></p>
-    <h2>Country:</h2>
-    <p><%= @movie.country %></p>
-    <h2>World premier:</h2>
-    <p><%= @movie.world_premier %></p>
-    <h2>budget:</h2>
-    <p><%= @movie.budget %></p>
-    <h2>Fees in world:</h2>
-    <p><%= @movie.fees_in_world %></p>
-    <h2>Fees in usa:</h2>
-    <p><%= @movie.fees_in_usa %></p>
-    <h2>Category:</h2>
-    <p><%= @movie.category.name %></p>
-    <h2>Draft:</h2>
-    <p><%= @movie.draft %></p>
-    <h2>Description:</h2>
-    <p><%= @movie.description %></p>
-    <h2>Genres</h2>
-    <% @movie.genres.each do |genre| %>
-      <p><%= genre.name %></p>
-      <% end %>
-    <h2>Actors</h2>
-    <% @movie.actors.each do |actor| %>
-      <p><%= actor.name %></p>
-    <% end %>
-
-    <h2>Directors</h2>
-    <% @movie.directors.each do |director| %>
-      <p><%= director.name %></p>
-    <% end %>
-
-    <h2>Shorts</h2>
-    <%= link_to 'Create Movie Short', new_movie_short_path(movie_id: @movie.id) %>
-    <table >
-      <thead >
-      <tr>
-        <th >Shorts Name</th>
-        <th>Action</th>
-      </tr>
-      </thead>
-      <tbody>
-      <% @movie_shorts.each do |movie_short| %>
-        <tr>
-          <td><%= movie_short.title %></td>
-          <td><%= image_tag movie_short.image %></td>
-
-          <td><%= button_to 'delete', movie_short_path(movie_short.id) , method: :delete%></td>
-
-
-      <% end %>
-      </table>
-
-
-
-
-    <div>
-
-      <h2>Reviews</h2>
-
-      <%= render partial: 'review_form', locals: { parent_id: nil } %>
-
-      <% @movie.reviews.where(parent_id: nil).each do |review| %>
-        <%= render 'review',review: review  %>
-      <% end %>
+<div id="page" class="page">
+    <div class="main-banner bg" id="home" style="background-image: url(<%= asset_path('single-post-pic.jpg') %>)">
+        <%= render 'movies/header' %>
     </div>
-
-
-
-
-  </div>
-  <%= link_to "Back to list", root_path %>
-
-  <div id="root_buttons" >
-    <td><%= button_to 'Edit', edit_movie_path(@movie), method: :get, id: 'rootBtn' %></td>
-    <td><%= button_to 'Remove', movie_path(@movie), method: :delete, data: { confirm: 'Are you sure?' }, id: 'rootBtn' %></td>
-  </div>
+    <ol class="breadcrumb editContent">
+        <li class="breadcrumb-item">
+            <%= link_to 'Home', root_path, class: 'editContent' %>
+        </li>
+        <li class="breadcrumb-item active editContent">Single Page</li>
+    </ol>
 </div>
+
+<section class="ab-info-main py-md-5 py-4 editContent" style="padding-left: 3rem; padding-right: 3rem;">
+
+    <div class="container-fluid py-md-3">
+        <div class="row">
+            <div class="side-bar col-lg-3">
+                <%= render 'movies/sidebar' %>
+            </div>
+            <div class="left-ads-display col-lg-8">
+                <div class="row">
+                    <div class="desc1-left col-md-6">
+                        <%= image_tag @movie.poster, style: 'width: 200px; height: 400px;' %>
+                    </div>
+                    <div class="desc1-right col-md-6 pl-lg-4">
+                        <h3 class="editContent" style="outline: none; cursor: inherit;">
+                            <%= @movie.title %></h3>
+                        <h5 class="editContent"></h5>
+                        <ul>
+                            <li style="list-style: none"><span><b>Год:</b> <%= @movie.year %></span></li>
+                            <li style="list-style: none"><span><b>Страна:</b> <%= @movie.country %></span></li>
+                            <li style="list-style: none"><span><b>Слоган:</b> <%= @movie.tagline %></span></li>
+                            <li style="list-style: none">
+                            <span><b>Режиссер:</b>
+                                <% @movie.directors.each do |director| %>
+                                   <p><%= director.name %></p>
+                                <% end %>
+                            </span>
+                            </li>
+                            <li style="list-style: none">
+                                <span><b>Актеры:</b>
+                                    <% @movie.actors.each do |actor| %>
+                                    <p><%= actor.name %></p>
+                                <% end %>
+                                </span>
+                            </li>
+                            <li style="list-style: none">
+                            <span><b>Жанр:</b>
+                                <% @movie.genres.each do |genre| %>
+                                    <p><%= genre.name %></p>
+                              <% end %>
+                            </span>
+                            </li>
+                            <li style="list-style: none"><span><b>Премьера в мире:</b> <%= @movie.world_premier %></span>
+                            </li>
+                            <li style="list-style: none"><span><b>Бюджет:</b> $<%= @movie.budget %></span></li>
+                            <li style="list-style: none"><span><b>Сборы в США:</b> $<%= @movie.fees_in_usa %></span></li>
+                            <li style="list-style: none"><span><b>Сборы в мире:</b> $<%= @movie.fees_in_world %></span>
+                            </li>
+
+                            <div class="share-desc">
+                                <div class="share">
+                                    <h4 class="editContent" style="outline: none; cursor: inherit;">Share:</h4>
+                                    <ul class="w3layouts_social_list list-unstyled">
+                                        <li>
+                                            <a href="#" class="w3pvt_facebook editContent" style="outline: none; cursor: inherit;">
+                                                <span class="fa fa-facebook-f" style="outline: none; cursor: inherit;"></span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="w3pvt_twitter editContent" style="outline: none; cursor: inherit;">
+                                                <span class="fa fa-twitter" style="outline: none; cursor: inherit;"></span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="w3pvt_dribble editContent" style="outline: none; cursor: inherit;">
+                                                <span class="fa fa-dribbble" style="outline: none; cursor: inherit;"></span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                        </ul>
+                        </div>
+                    </div>
+                <div class="">
+                    <h3 class="editContent mt-4" style="outline: none; cursor: inherit;">О фильме</h3>
+                    <br>
+                    <p class="editContent" style="outline: none; cursor: inherit;">
+                        <%= @movie.description %>
+                    </p>
+                    <ul style="display: flex; justify-content: space-between">
+                        <% @movie_shorts.each do |movie_short| %>
+                            <%= image_tag movie_short.image, style: "max-width: 250px; max-height: 200px;" %>
+                        <% end %>
+                    </ul>
+                </div>
+                <hr>
+                <div class="row" style="display: flex; flex-direction: column">
+                    <div class="single-form-left">
+                        <!-- contact form grid -->
+                        <div class="contact-single">
+                            <div>
+                                <h2 class="mt-2">Отзывы</h2>
+                                <%= render partial: 'review_form', locals: { parent_id: nil } %>
+                                <% @movie.reviews.where(parent_id: nil).each do |review| %>
+                                    <%= render 'review', review: review %>
+                                <% end %>
+                            </div>
+                        </div>
+                        <!-- //contact form grid ends here -->
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <script>
+            function addReview(name, id) {
+                document.getElementById('contactparent').value = id
+                document.getElementById('contactcomment').innerText = `${name},`
+            }
+        </script>
+    </div>
+    <%= link_to "Back to list", root_path %>
+
+    <div id="root_buttons">
+        <td><%= button_to 'Edit', edit_movie_path(@movie), method: :get, id: 'rootBtn' %></td>
+        <td><%= button_to 'Remove', movie_path(@movie), method: :delete, data: { confirm: 'Are you sure?' }, id: 'rootBtn' %></td>
+    </div>
+</section>
+

@@ -18,5 +18,5 @@ Rails.application.routes.draw do
 
   resources :reviews
 
-  root "main#index"
+  root "movies#index"
 end

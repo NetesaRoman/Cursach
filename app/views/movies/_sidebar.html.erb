@@ -1,0 +1,37 @@
+<%= search_form_for @q do |f| %>
+    <div class="search-bar w3layouts-newsletter">
+        <h3 class="sear-head editContent" >Поиск фильма</h3>
+        <%= f.text_field :title_cont, placeholder: 'Введите название', class: 'form-control' %>
+    </div>
+    <div class="left-side my-4">
+        <h3 class="sear-head editContent" >Жанры</h3>
+        <ul class="w3layouts-box-list">
+            <% Genre.all.each do |genre| %>
+                <%= f.check_box :genres_id_eq_any, { multiple: true }, genre.id, nil %>
+                <%= label_tag "genre_#{genre.id}", genre.name %>
+            <% end %>
+        </ul>
+    </div>
+
+    <div class="left-side my-4">
+        <h3 class="sear-head editContent" >Года</h3>
+        <ul class="w3layouts-box-list">
+            <% Movie.distinct.pluck(:year).sort.each do |year| %>
+                <%= f.check_box :year_eq_any, { multiple: true }, year, nil %>
+                <%= label_tag "year_#{year}", year %> <br>
+            <% end %>
+        </ul>
+    </div>
+
+    <div class="left-side my-4">
+        <h3 class="sear-head editContent">Категории</h3>
+        <ul class="w3layouts-box-list">
+            <% Category.all.each do |category| %>
+                <%= f.check_box :category_id_eq_any, { multiple: true }, category.id, nil %>
+                <%= label_tag "category_#{category.id}", category.name %>
+            <% end %>
+        </ul>
+    </div>
+
+    <%= f.submit 'Поиск' %>
+<% end %>

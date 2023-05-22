@@ -1,0 +1,45 @@
+<!-- header -->
+    <header class="header">
+        <div class="container-fluid px-lg-5">
+            <!-- nav -->
+            <nav class="py-4">
+                <div id="logo">
+                    <h1> <a href="index.html" class="editContent" style="outline: none; outline-offset: -2px; cursor: inherit; color: rgb(255, 255, 255); font-size: 40px; background-color: rgba(0, 0, 0, 0);">Movie site</a></h1>
+                </div>
+
+                <label for="drop" class="toggle">Menu</label>
+                <input type="checkbox" id="drop">
+                <ul class="menu mt-2">
+                    <li class="active"><a href="/">Главная</a></li>
+                    <li>
+                        <!-- First Tier Drop Down -->
+                        <label for="drop-2" class="toggle">Категории <span class="fa fa-angle-down" aria-hidden="true" ></span> </label>
+                        <a href="#">Категории <span class="fa fa-angle-down" aria-hidden="true"></span></a>
+                        <input type="checkbox" id="drop-2">
+                        <ul>
+                            <% Category.all.each do |category| %>
+                                <p><%= category.name %></p>
+                            <% end %>
+                        </ul>
+                    </li>
+                    <% if user_signed_in? %>
+                        <%= button_to 'Выход', destroy_user_session_path , method: 'delete'%>
+                    <% else %>
+                        <%= button_to 'Регистарация', new_user_registration_path , method: 'get'%>
+                        <%= button_to 'Вход',new_user_session_path , method: 'get'%>
+                    <% end %>
+
+                </ul>
+            </nav>
+            <!-- //nav -->
+        </div>
+    </header>
+    <!-- //header -->
+    <!--/banner-->
+    <div class="banner-info">
+        <h3 class="mb-4 editContent">Курсовая работа 2 ровных студентов</h3>
+        <div class="ban-buttons">
+
+        </div>
+    </div>
+    <!--// banner-inner -->

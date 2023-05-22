@@ -13,6 +13,7 @@ class MoviesController < ApplicationController
 
   def show
     @movie = Movie.find(params[:id])
+    @q = Movie.where(draft: true).ransack(params[:q])
     @movie_shorts = @movie.movie_shorts
     @likes = @movie.likes.count
     @dislikes = @movie.dislikes.count
