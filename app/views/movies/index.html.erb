@@ -1,56 +1,60 @@
-<%# if current_user.admin %>
-<!--    <li><%#= link_to 'Create movie', new_movie_path %></li>-->
-<!--    <li><%#= link_to 'Manage genres', genres_path %></li>-->
-<!--    <li><%#= link_to 'Manage categories', categories_path %></li>-->
-<!--    <li><%#= link_to 'Manage actors', actors_path %></li>-->
-<!--    <li><%#= link_to 'Manage directors', directors_path %></li>-->
-<%# end %>
+<% if current_user.admin %>
+  <li><%= link_to 'Create movie', new_movie_path %></li>
+  <li><%= link_to 'Manage genres', genres_path %></li>
+  <li><%= link_to 'Manage categories', categories_path %></li>
+  <li><%= link_to 'Manage actors', actors_path %></li>
+  <li><%= link_to 'Manage directors', directors_path %></li>
+<% end %>
 
 <div id="page" class="page">
-    <div class="main-banner bg" id="home" style="background-image: url(<%= asset_path('main.jpg') %>)">
-        <%= render 'movies/header' %>
-    </div>
+  <div class="main-banner bg" id="home" style="background-image: url(<%= asset_path('main.jpg') %>)">
+    <%= render 'movies/header' %>
+  </div>
 </div>
 
 
 <section class="ab-info-main py-md-5 py-4 editContent" style="padding-left: 3rem; padding-right: 3rem;">
 
-    <div class="container-fluid py-md-3">
+  <div class="container-fluid py-md-3">
+    <div class="row">
+      <div class="side-bar col-lg-3">
+        <%= render 'movies/sidebar' %>
+      </div>
+      <div class="left-ads-display col-lg-9">
         <div class="row">
-            <div class="side-bar col-lg-3">
-                <%= render 'movies/sidebar' %>
-            </div>
-            <div class="left-ads-display col-lg-9">
-                <div class="row">
-                    <% @movies.each do |movie| %>
-                        <div class="col-md-4 product-men">
-                            <div class="product-shoe-info editContent text-center mt-lg-4">
-                                <div class="men-thumb-item">
-                                    <%= image_tag movie.poster, style: 'max-height: 220px; width: 420px' %>
-                                    <img style="max-height: 220px; width: 420px" src="#" class="img-fluid" alt="">
-                                </div>
-                                <div class="item-info-product">
-                                    <h4 class="">
-                                        <a href="movies/<%= movie.id %>" class="editContent">
-                                            <%= movie.title %>
-                                        </a>
-                                    </h4>
-                                    <div class="product_price">
-                                        <div class="grid-price">
-                                            <span class="money editContent"><%= movie.tagline %></span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    <% end %>
+          <% @movies.each do |movie| %>
+            <div class=" product-men", style = " margin-left: 20px;">
+              <div class="product-shoe-info editContent text-center mt-lg-4" , style = " width: 280px;">
+                <div class="men-thumb-item", style = "height: 380px; width: 280px;">
+                  <%= image_tag movie.poster, style: 'max-height: 380px; width: 260px;  ' %>
+                  <!--                                    <img style="max-height: 220px; width: 420px" src="#" class="img-fluid" alt="">-->
                 </div>
-                <div class="grid-img-right mt-4 text-right bg bg1">
-                    <%#= render 'movies/pagination' %>
+                <div class="item-info-product">
+                  <h4 class="">
+                    <a href="movies/<%= movie.id %>" class="editContent">
+                      <%= movie.title %>
+                    </a>
+                  </h4>
+                  <div class="product_price">
+                    <div class="grid-price" >
+                      <span class="money editContent"  ><%= movie.tagline %></span>
+                    </div>
+                  </div>
                 </div>
+              </div>
             </div>
+          <% end %>
         </div>
+        <div class="grid-img-right mt-4 text-right bg bg1">
+
+          <div class="apple_pagination">
+                     <%= will_paginate @movies, :container => false %>
+          </div>
+
+        </div>
+      </div>
     </div>
+  </div>
 </section>
 
 

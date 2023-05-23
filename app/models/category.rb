@@ -1,7 +1,7 @@
 class Category < ApplicationRecord
   validates :name, presence: true, length: { maximum: 150 }
   validates :description, presence: true
-  validates :url, presence: true, length: { maximum: 150 }, uniqueness: true
+  validates :url, presence: true, length: { maximum: 150 }
 
   has_many :movies, dependent: :nullify
 

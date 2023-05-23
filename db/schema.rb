@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_14_111545) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_23_080337) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -30,7 +30,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_14_111545) do
     t.string "name"
     t.text "description"
     t.string "url"
-    t.index ["url"], name: "index_categories_on_url", unique: true
   end
 
   create_table "directors", force: :cascade do |t|
@@ -58,7 +57,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_14_111545) do
     t.string "name"
     t.text "description"
     t.string "url"
-    t.index ["url"], name: "index_genres_on_url", unique: true
   end
 
   create_table "likes", force: :cascade do |t|
@@ -121,10 +119,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_14_111545) do
     t.integer "fees_in_usa", default: 0
     t.integer "fees_in_world", default: 0
     t.integer "category_id"
-    t.string "url"
     t.boolean "draft", default: false
     t.integer "likes", default: 0
     t.integer "dislikes", default: 0
+    t.string "url"
   end
 
   create_table "reviews", force: :cascade do |t|
@@ -151,13 +149,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_14_111545) do
   end
 
   add_foreign_key "movie_actors", "actors"
-  add_foreign_key "movie_actors", "movies"
+  add_foreign_key "movie_actors", "movies", on_delete: :cascade
   add_foreign_key "movie_directors", "directors"
-  add_foreign_key "movie_directors", "movies"
+  add_foreign_key "movie_directors", "movies", on_delete: :cascade
   add_foreign_key "movie_genres", "genres"
-  add_foreign_key "movie_genres", "movies"
-  add_foreign_key "movie_shorts", "movies"
+  add_foreign_key "movie_genres", "movies", on_delete: :cascade
+  add_foreign_key "movie_shorts", "movies", on_delete: :cascade
   add_foreign_key "movies", "categories"
-  add_foreign_key "reviews", "movies"
+  add_foreign_key "reviews", "movies", on_delete: :cascade
   add_foreign_key "reviews", "reviews", column: "parent_id"
 end

@@ -1,8 +1,6 @@
 class Movie < ApplicationRecord
   validates :title, presence: true, length: { maximum: 100 }
   validates :tagline, length: { maximum: 100 }
-  validates :description, presence: true
-  validates :poster, presence: true
   validates :year, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
 
   validates :country, presence: true
@@ -10,7 +8,7 @@ class Movie < ApplicationRecord
   validates :budget, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
   validates :fees_in_usa, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
   validates :fees_in_world, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
-  validates :url, presence: true, length: { maximum: 150 }, uniqueness: true
+
 
   belongs_to :category
 

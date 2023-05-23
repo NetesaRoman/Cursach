@@ -10,23 +10,13 @@
                 <label for="drop" class="toggle">Menu</label>
                 <input type="checkbox" id="drop">
                 <ul class="menu mt-2">
-                    <li class="active"><a href="/">Главная</a></li>
-                    <li>
-                        <!-- First Tier Drop Down -->
-                        <label for="drop-2" class="toggle">Категории <span class="fa fa-angle-down" aria-hidden="true" ></span> </label>
-                        <a href="#">Категории <span class="fa fa-angle-down" aria-hidden="true"></span></a>
-                        <input type="checkbox" id="drop-2">
-                        <ul>
-                            <% Category.all.each do |category| %>
-                                <p><%= category.name %></p>
-                            <% end %>
-                        </ul>
-                    </li>
+                    <li class="active"><a href="/">Головна</a></li>
+
                     <% if user_signed_in? %>
-                        <%= button_to 'Выход', destroy_user_session_path , method: 'delete'%>
+                        <%= button_to 'Вихід', destroy_user_session_path , method: 'delete'%>
                     <% else %>
-                        <%= button_to 'Регистарация', new_user_registration_path , method: 'get'%>
-                        <%= button_to 'Вход',new_user_session_path , method: 'get'%>
+                        <%= button_to 'Реєстрація', new_user_registration_path , method: 'get'%>
+                        <%= button_to 'Вхід',new_user_session_path , method: 'get'%>
                     <% end %>
 
                 </ul>
@@ -37,7 +27,7 @@
     <!-- //header -->
     <!--/banner-->
     <div class="banner-info">
-        <h3 class="mb-4 editContent">Курсовая работа 2 ровных студентов</h3>
+        <h3 class="mb-4 editContent">Курсова робота 2х чітких студентів</h3>
         <div class="ban-buttons">
 
         </div>

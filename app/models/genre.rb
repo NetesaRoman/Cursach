@@ -1,7 +1,7 @@
 class Genre < ApplicationRecord
   validates :name, presence: true, length: { maximum: 100 }
   validates :description, presence: true
-  validates :url, presence: true, length: { maximum: 150 }, uniqueness: true
+  validates :url, presence: true, length: { maximum: 150 }
 
   has_many :movie_genres, dependent: :destroy
   has_many :movies, through: :movie_genres

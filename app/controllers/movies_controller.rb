@@ -5,7 +5,7 @@ class MoviesController < ApplicationController
   def index
 
     @q = Movie.where(draft: true).ransack(params[:q])
-    @movies = @q.result(distinct: true).paginate(page: params[:page], per_page: 5)
+    @movies = @q.result(distinct: true).paginate(page: params[:page], per_page: 8)
 
     @recent = Movie.where(draft: true).where('created_at >= ?', 1.week.ago).order(created_at: :desc)
 
@@ -31,12 +31,45 @@ class MoviesController < ApplicationController
 
   def update
 
+
+
+      @category = Category.find(params[:movie][:category_id])
       @movie = Movie.find(params[:id])
+      @movie.category = @category
+      if  @movie.update(movie_params)
+        # Загрузка файла на сервер
 
-      @movie.update(movie_params)
+        @movie.update(movie_params)
+
+        # запись в смежные таблицы
+        genre_ids = params[:movie][:genre_ids] || []
+        genre_ids.each do |genre_id|
+          @movie.movie_genres.find_or_create_by(genre_id: genre_id)
+        end
+        actor_ids = params[:movie][:actor_ids] || []
+        actor_ids.each do |actor_id|
+          @movie.movie_actors.find_or_create_by(actor_id: actor_id)
+        end
+        director_ids = params[:movie][:director_ids] || []
+        director_ids.each do |director_id|
+          @movie.movie_directors.find_or_create_by(director_id: director_id)
+        end
 
 
-    redirect_to movie_path(@movie)
+      else
+        if @movie.errors.any?
+          @movie.errors.full_messages.each do |message|
+            puts message
+          end
+        end
+
+      end
+
+
+
+
+
+    redirect_to movie_path(@movie) , allow_other_host: true
   end
 
   def new
@@ -53,8 +86,9 @@ class MoviesController < ApplicationController
   def create
 
 
-
+    @category = Category.find(params[:movie][:category_id])
     @movie = Movie.new(movie_params)
+    @movie.category = @category
     if @movie.save
       # Загрузка файла на сервер
       uploaded_file = params[:movie][:poster]
@@ -65,24 +99,28 @@ class MoviesController < ApplicationController
 
       # Сохранение пути к файлу в базе данных
       @movie.poster = "/posters/#{uploaded_file.original_filename}"
-      @movie.save
 
       # запись в смежные таблицы
       genre_ids = params[:movie][:genre_ids] || []
       genre_ids.each do |genre_id|
-        @movie.movie_genres.create(genre_id: genre_id)
+        @movie.movie_genres.find_or_create_by(genre_id: genre_id)
       end
       actor_ids = params[:movie][:actor_ids] || []
       actor_ids.each do |actor_id|
-        @movie.movie_actors.create(actor_id: actor_id)
+        @movie.movie_actors.find_or_create_by(actor_id: actor_id)
       end
       director_ids = params[:movie][:director_ids] || []
       director_ids.each do |director_id|
-        @movie.movie_directors.create(director_id: director_id)
+        @movie.movie_directors.find_or_create_by(director_id: director_id)
       end
 
       redirect_to movies_path, allow_other_host: true
     else
+      if @movie.errors.any?
+        @movie.errors.full_messages.each do |message|
+          puts message
+        end
+      end
       render :new
     end
   end
@@ -135,6 +173,6 @@ class MoviesController < ApplicationController
 
   def movie_params
     params.require(:movie).permit(:title, :description, :poster, :tagline, :year, :country, :world_premier,
-                                  :budget, :fees_in_usa, :fees_in_world, :category_id, :url, :draft,  actor_ids: [], genre_ids: [], director_ids: [])
+                                  :budget, :fees_in_usa, :fees_in_world, :category_id, :url, actor_ids: [], genre_ids: [], director_ids: [])
   end
 end
