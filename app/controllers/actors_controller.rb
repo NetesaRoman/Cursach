@@ -71,6 +71,6 @@ class ActorsController < ApplicationController
 
   private
   def actor_params
-    params.require(:actor).permit(:name, :age, :description, :image)
+    params.require(:actor).permit(:name, :date_of_birth, :description, :image)
   end
 end

@@ -25,17 +25,17 @@
   <%= form.text_field :category_id, class: 'form-control' %>
   <%= form.label :draft %>
   <%= form.text_field :draft, class: 'form-control' %>
-
+  <h3>Жанри</h3>
   <%= form.collection_check_boxes :genre_ids, Genre.all, :id, :name, checked: @movie.genre_ids, include_hidden: false do |cb| %>
     <%= cb.check_box %>
     <%= cb.label %>
   <% end %>
-
+  <h3>Актори</h3>
   <%= form.collection_check_boxes :actor_ids, Actor.all, :id, :name, checked: @movie.actor_ids, include_hidden: false do |cb| %>
     <%= cb.check_box %>
     <%= cb.label %>
   <% end %>
-
+  <h3>Режисери</h3>
   <%= form.collection_check_boxes :director_ids, Director.all, :id, :name, checked: @movie.director_ids, include_hidden: false do |cb| %>
     <%= cb.check_box %>
     <%= cb.label %>

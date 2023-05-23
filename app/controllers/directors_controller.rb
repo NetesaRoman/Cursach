@@ -71,6 +71,6 @@ class DirectorsController < ApplicationController
 
   private
   def director_params
-    params.require(:director).permit(:name, :age, :description, :image)
+    params.require(:director).permit(:name, :date_of_birth, :description, :image)
   end
 end

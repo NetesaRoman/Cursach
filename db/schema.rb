@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_23_080337) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_23_113009) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -18,9 +18,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_23_080337) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "name"
-    t.integer "age", default: 0
     t.text "description"
     t.string "image"
+    t.date "date_of_birth"
     t.index ["name"], name: "index_actors_on_name", unique: true
   end
 
@@ -34,11 +34,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_23_080337) do
 
   create_table "directors", force: :cascade do |t|
     t.string "name", limit: 150, null: false
-    t.integer "age", null: false
     t.text "description", null: false
     t.string "image", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.date "date_of_birth"
   end
 
   create_table "dislikes", force: :cascade do |t|

@@ -33,14 +33,15 @@
               <li style="list-style: none">
                             <span><b>Режисер:</b>
                               <% @movie.directors.each do |director| %>
-                                   <p><%= director.name %></p>
+                                   <p><%= image_tag director.image, style: 'max-height: 70px; width: 70px;  ' %><%= director.name %></p>
                                 <% end %>
                             </span>
               </li>
               <li style="list-style: none">
                                 <span><b>Актори:</b>
                                   <% @movie.actors.each do |actor| %>
-                                    <p><%= actor.name %></p>
+                                    <p> <%= image_tag actor.image, style: 'max-height: 70px; width: 70px;  ' %>
+                                   <%= actor.name %></p>
                                 <% end %>
                                 </span>
               </li>
