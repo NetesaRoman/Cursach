@@ -8,7 +8,7 @@
         <ul class="w3layouts-box-list">
             <% Genre.all.each do |genre| %>
                 <%= f.check_box :genres_id_eq_any, { multiple: true }, genre.id, nil %>
-                <%= label_tag "genre_#{genre.id}", genre.name %>
+                <%= label_tag "genre_#{genre.id}", genre.name %><br>
             <% end %>
         </ul>
     </div>
@@ -28,7 +28,7 @@
         <ul class="w3layouts-box-list">
             <% Category.all.each do |category| %>
                 <%= f.check_box :category_id_eq_any, { multiple: true }, category.id, nil %>
-                <%= label_tag "category_#{category.id}", category.name %>
+                <%= label_tag "category_#{category.id}", category.name %><br>
             <% end %>
         </ul>
     </div>

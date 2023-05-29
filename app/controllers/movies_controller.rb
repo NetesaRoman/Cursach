@@ -90,17 +90,17 @@ class MoviesController < ApplicationController
     @movie = Movie.new(movie_params)
     @movie.category = @category
     if @movie.save
-      # Загрузка файла на сервер
+
       uploaded_file = params[:movie][:poster]
       file_path = Rails.root.join('public', 'posters', uploaded_file.original_filename)
       File.open(file_path, 'wb') do |file|
         file.write(uploaded_file.read)
       end
 
-      # Сохранение пути к файлу в базе данных
+
       @movie.poster = "/posters/#{uploaded_file.original_filename}"
 
-      # запись в смежные таблицы
+
       genre_ids = params[:movie][:genre_ids] || []
       genre_ids.each do |genre_id|
         @movie.movie_genres.find_or_create_by(genre_id: genre_id)

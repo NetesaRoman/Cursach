@@ -13,7 +13,7 @@ class Movie < ApplicationRecord
   belongs_to :category
 
 
-  has_many :movie_shorts,dependent: :destroy  # Добавляем ассоциацию с MovieShort
+  has_many :movie_shorts,dependent: :destroy
 
   has_many :movie_actors,dependent: :destroy
   has_many :actors, through: :movie_actors
